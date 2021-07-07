@@ -3,6 +3,11 @@ import json
 import random
 import requests
 
+common_words = ['the', 'of', 'and', 'a', 'to', 'in', 'is', 'be', 'that',
+                'was', 'he', 'for', 'it', 'with', 'as', 'his', 'I', 'on',
+                'have', 'at', 'by', 'not', 'they', 'this', 'had', 'are',
+                'but', 'from', 'or', 'she', 'an', 'which']
+
 client: discord.Client = discord.Client()
 alpha = 'abcdefghijklmnopqrstuvwxyz'
 do_copypasta = False
@@ -131,6 +136,9 @@ def word_filter(word: str) -> bool:
     :param word: Word to filter
     :return: OK
     """
+    if word in common_words:
+        return False
+
     for _, c in enumerate(word):
         if c not in alpha:
             return False
