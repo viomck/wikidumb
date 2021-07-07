@@ -4,7 +4,7 @@ import random
 import requests
 
 common_words = ['the', 'of', 'and', 'a', 'to', 'in', 'is', 'be', 'that',
-                'was', 'he', 'for', 'it', 'with', 'as', 'his', 'I', 'on',
+                'was', 'he', 'for', 'it', 'with', 'as', 'his', 'i', 'on',
                 'have', 'at', 'by', 'not', 'they', 'this', 'had', 'are',
                 'but', 'from', 'or', 'she', 'an', 'which']
 
