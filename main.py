@@ -41,6 +41,8 @@ async def on_message(message: discord.Message):
     if random.randint(0, 4) > 0 and not do_copypasta:  # 20% chance
         return
 
+    do_copypasta = False
+
     content = message.clean_content.lower()
     words = list(filter(word_filter, content.split(' ')))
 
