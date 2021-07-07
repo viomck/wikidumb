@@ -56,7 +56,7 @@ async def on_message(message: discord.Message):
     if not copypasta:
         do_copypasta = True  # Try on next message
     else:
-        await message.channel.send(copypasta)
+        await message.channel.send(copypasta[:2000])
 
 
 @client.event
