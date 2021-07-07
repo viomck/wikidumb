@@ -59,6 +59,11 @@ async def on_message(message: discord.Message):
         await message.channel.send(copypasta)
 
 
+@client.event
+async def on_ready():
+    await client.change_presence(activity=discord.Game('git.io/wikidumb'))
+
+
 def get_wikipedia_copypasta(words: list, tries: int = 0):
     """
     Returns a Wikipedia copypasta for a given word list. Will try and pick a
