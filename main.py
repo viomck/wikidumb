@@ -120,6 +120,10 @@ def get_first_link_in_article(article: str):
 
     raw = requests.get(wikitext_url + article).json()
     text = raw['parse']['wikitext']['*']
+
+    if 'may refer to' in text:
+        text = text.split('may refer to')[1]
+
     link = text.split('[[')[1].split(']]')[0]
 
     return link
