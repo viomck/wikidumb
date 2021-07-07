@@ -1,6 +1,6 @@
 ![wikidumb](https://static.violet.wtf/wd.png)
 # wikidumb
-it's very simple. 1/5-ish chance every message.
+it's very simple. 1/50-ish chance every message.
 
 ![example](https://static.violet.wtf/wdex.png)
 
