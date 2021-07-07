@@ -43,7 +43,7 @@ async def on_message(message: discord.Message):
     if message.author.bot:
         return
 
-    if random.randint(0, 4) > 0 and not do_copypasta:  # 20% chance
+    if random.randint(0, 49) > 0 and not do_copypasta:  # 1/50 chance
         return
 
     do_copypasta = False
