@@ -90,6 +90,12 @@ def get_wikipedia_copypasta(words: list, tries: int = 0):
 
     if 'may refer to' in para:
         next_article = get_first_link_in_article(article)
+        next_article_clean = clean_word(next_article)
+
+        # Be a bit more lax on disambiguation, but still enforce relevance
+        if not next_article_clean.startswith(word_clean):
+            return get_wikipedia_copypasta(words, tries + 1)
+
         para = get_first_para_from_article(next_article)
 
     return para
