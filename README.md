@@ -1,4 +1,6 @@
 ![wikidumb](https://static.violet.wtf/wd.png)
+
+(disclaimer: penple is not actually famous)
 # wikidumb
 it's very simple. 1/50-ish chance every message.
 
