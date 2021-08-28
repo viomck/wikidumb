@@ -64,8 +64,11 @@ async def on_message(message: discord.Message):
         formatted_copypasta = ''
 
         if mode == 'AB':
-            mode = secrets.choice(['SENTENCE', 'LEGACY'])
-            formatted_copypasta = '(' + mode[0] + ') ' + formatted_copypasta
+            if message.guild.id in get_config()['ab_guilds']:
+                mode = secrets.choice(['SENTENCE', 'LEGACY'])
+                formatted_copypasta = '(' + mode[0] + ') ' + formatted_copypasta
+            else:
+                mode = get_config()['ab_backup']
 
         if mode == 'SENTENCE':
             formatted_copypasta += copypasta.split('. ')[0]
