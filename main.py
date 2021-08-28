@@ -2,6 +2,7 @@ import discord
 import json
 import random
 import requests
+import secrets
 
 common_words = ['the', 'of', 'and', 'a', 'to', 'in', 'is', 'be', 'that',
                 'was', 'he', 'for', 'it', 'with', 'as', 'his', 'i', 'on',
@@ -15,10 +16,10 @@ do_copypasta = False
 api_url = 'https://en.wikipedia.org/w/api.php?format=json'
 
 search_url = api_url + '&action=opensearch' \
-             '&limit=1' \
-             '&namespace=0' \
-             '&redirects=resolve' \
-             '&search='
+                       '&limit=1' \
+                       '&namespace=0' \
+                       '&redirects=resolve' \
+                       '&search='
 
 read_url = api_url + '&action=query' \
                      '&prop=extracts' \
@@ -43,7 +44,10 @@ async def on_message(message: discord.Message):
     if message.author.bot:
         return
 
-    if random.randint(0, 49) > 0 and not do_copypasta:  # 1/50 chance
+    force = message.author.id == get_config()['owner'] and \
+            message.clean_content.startswith('wdforce')
+
+    if random.randint(0, 99) > 0 and not do_copypasta and not force:  # 1/100 chance
         return
 
     do_copypasta = False
@@ -56,7 +60,19 @@ async def on_message(message: discord.Message):
     if not copypasta:
         do_copypasta = True  # Try on next message
     else:
-        await message.channel.send(copypasta[:2000])
+        mode = get_config()['mode']
+        formatted_copypasta = ''
+
+        if mode == 'AB':
+            mode = secrets.choice(['SENTENCE', 'LEGACY'])
+            formatted_copypasta = '(' + mode[0] + ') ' + formatted_copypasta
+
+        if mode == 'SENTENCE':
+            formatted_copypasta += copypasta.split('. ')[0]
+        elif mode == 'LEGACY':
+            formatted_copypasta += copypasta
+
+        await message.channel.send(formatted_copypasta[:2000])
 
 
 @client.event
