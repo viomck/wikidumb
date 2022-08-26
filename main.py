@@ -75,6 +75,13 @@ async def on_message(message: discord.Message):
         elif mode == 'LEGACY':
             formatted_copypasta += copypasta
 
+        # killswitch:  some wikipedia templates render really stupidly on
+        # wikitext - if it contains URL encoding, kill it mercilessly
+        if "%" in formatted_copypasta:
+            # try again next time
+            do_copypasta = True
+            return
+
         await message.channel.send(formatted_copypasta[:2000])
 
 
